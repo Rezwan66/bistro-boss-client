@@ -12,7 +12,7 @@ const Banner = () => {
   return (
     <div>
       <Carousel autoPlay={true} infiniteLoop={true} interval={3000}>
-        <div className="h-[200px]">
+        <div>
           <img src={img1} />
         </div>
         <div>
