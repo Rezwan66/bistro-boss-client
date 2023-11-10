@@ -8,15 +8,19 @@ import slide2 from '../../../assets/home/slide2.jpg';
 import slide3 from '../../../assets/home/slide3.jpg';
 import slide4 from '../../../assets/home/slide4.jpg';
 import slide5 from '../../../assets/home/slide5.jpg';
+import SectionTitle from '../../../components/SectionTitle';
 
 const Category = () => {
   return (
-    <div className="max-w-screen-xl mx-auto my-20">
+    <div className="max-w-screen-xl mx-auto my-20 px-6 lg:px-0">
+      <SectionTitle
+        subHeading={'From 11:00am to 10:00pm'}
+        heading={'ORDER ONLINE'}
+      ></SectionTitle>
       <Swiper
         slidesPerView={4}
         rewind={true}
-        spaceBetween={30}
-        centeredSlides={true}
+        spaceBetween={80}
         pagination={{
           clickable: true,
         }}

@@ -5,14 +5,14 @@ const Footer = () => {
   return (
     <footer>
       <div className="flex text-white">
-        <aside className="flex-1 bg-[#1F2937] p-20 text-right">
+        <aside className="flex-1 bg-[#1F2937] p-4 md:py-8 lg:p-20 md:text-right">
           <header className="footer-title text-2xl">CONTACT US</header>
           <p className="leading-7 mt-6">
             123 ABS Street, Uni 21, Bangladesh <br /> +88 123456789 <br /> Mon -
             Fri: 08:00 - 22:00 <br /> Sat - Sun: 10:00 - 23:00
           </p>
         </aside>
-        <nav className="flex-1 bg-[#111827] p-20">
+        <nav className="flex-1 bg-[#111827] p-4 md:py-8 lg:p-20">
           <header className="footer-title text-2xl">Follow US</header>
           <h4 className="my-6">Join us on social media</h4>
           <div className="grid grid-cols-3 max-w-[200px]">
