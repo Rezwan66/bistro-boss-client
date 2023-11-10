@@ -55,8 +55,7 @@ const Footer = () => {
       <div className="footer footer-center p-4 bg-[#151515] text-white">
         <aside>
           <p>
-            Copyright © {yearDynamic} - All right reserved by ACME Industries
-            Ltd
+            Copyright © {yearDynamic} - All right reserved by Bistro Boss GmbH
           </p>
         </aside>
       </div>
