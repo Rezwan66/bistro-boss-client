@@ -2,7 +2,7 @@ import img from '../../../assets/home/chef-service.jpg';
 
 const About = () => {
   return (
-    <div className=" my-20">
+    <div className="my-20">
       <div
         className="hero h-[572px] bg-fixed"
         style={{
