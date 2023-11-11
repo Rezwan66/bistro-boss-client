@@ -1,11 +1,14 @@
+import { NavLink } from 'react-router-dom';
+import logoImg from '/logo.png';
+
 const NavBar = () => {
   const navOptions = (
     <>
       <li>
-        <a>Home</a>
+        <NavLink to="/">HOME</NavLink>
       </li>
       <li>
-        <a>Item 3</a>
+        <NavLink to="/menu">OUR MENU</NavLink>
       </li>
     </>
   );
@@ -39,9 +42,12 @@ const NavBar = () => {
                 {navOptions}
               </ul>
             </div>
-            <div className="btn btn-ghost normal-case text-base cinzel font-black">
-              BISTRO BOSS <br />
-              Restaurant
+            <div className="flex items-center gap-3 btn btn-ghost">
+              <img className="w-10" src={logoImg} alt="" />
+              <div className="md:text-lg text-xs cinzel font-black uppercase">
+                <p>BISTRO BOSS</p>
+                <p className="md:text-sm md:tracking-widest">Restaurant</p>
+              </div>
             </div>
           </div>
           <div className="navbar-center hidden lg:flex">
