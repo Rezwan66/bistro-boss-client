@@ -12,7 +12,7 @@ const MenuCategory = ({ items, title, img }) => {
         ></Cover>
       )}
       <div className="grid md:grid-cols-2 gap-10 max-w-screen-xl mx-auto my-12 px-6 lg:px-0">
-        {items?.map(item => (
+        {items?.slice(0, 6).map(item => (
           <MenuItem key={item._id} item={item}></MenuItem>
         ))}
       </div>
