@@ -20,7 +20,7 @@ const Category = () => {
       <Swiper
         slidesPerView={4}
         rewind={true}
-        spaceBetween={80}
+        spaceBetween={30}
         pagination={{
           clickable: true,
         }}
@@ -29,31 +29,31 @@ const Category = () => {
       >
         <SwiperSlide>
           <img src={slide1} alt="" />
-          <h3 className="cinzel text-center text-3xl text-white uppercase -mt-20 mb-10">
+          <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
             salads
           </h3>
         </SwiperSlide>
         <SwiperSlide>
           <img src={slide2} alt="" />
-          <h3 className="cinzel text-center text-3xl text-white uppercase -mt-20 mb-10">
+          <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
             pizzas
           </h3>
         </SwiperSlide>
         <SwiperSlide>
           <img src={slide3} alt="" />
-          <h3 className="cinzel text-center text-3xl text-white uppercase -mt-20 mb-10">
+          <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
             soups
           </h3>
         </SwiperSlide>
         <SwiperSlide>
           <img src={slide4} alt="" />
-          <h3 className="cinzel text-center text-3xl text-white uppercase -mt-20 mb-10">
+          <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
             desserts
           </h3>
         </SwiperSlide>
         <SwiperSlide>
           <img src={slide5} alt="" />
-          <h3 className="cinzel text-center text-3xl text-white uppercase -mt-20 mb-10">
+          <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
             salads
           </h3>
         </SwiperSlide>

@@ -2,15 +2,15 @@ import img from '../../../assets/home/chef-service.jpg';
 
 const About = () => {
   return (
-    <div className="max-w-screen-xl mx-auto my-20 px-6 lg:px-0">
+    <div className=" my-20">
       <div
-        className="hero h-[572px] object-cover"
+        className="hero h-[572px] bg-fixed"
         style={{
           backgroundImage: `url(${img})`,
         }}
       >
         {/* <div className="hero-overlay"></div> */}
-        <div className="hero-content text-center">
+        <div className="hero-content text-center max-w-screen-xl mx-auto px-6 lg:px-0">
           <div className="max-w-4xl bg-white lg:p-20 p-8">
             <h1 className="mb-5 text-5xl cinzel">Bistro Boss</h1>
             <p className="mb-5">
