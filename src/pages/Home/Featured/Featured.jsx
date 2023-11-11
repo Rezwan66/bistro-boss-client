@@ -12,7 +12,7 @@ const Featured = () => {
   //   console.log(formattedDate);
   return (
     <div className="featured-item bg-fixed text-white my-20">
-      <div className=" bg-black bg-opacity-40 pt-10 pb-20">
+      <div className="bg-black bg-opacity-40 pt-10 pb-20">
         <div className="max-w-screen-xl mx-auto px-6 lg:px-0">
           <SectionTitle
             heading="FROM OUR MENU"
