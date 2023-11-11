@@ -12,7 +12,7 @@ const ChefRecommends = () => {
         setMenu(data);
       });
   }, []);
-  console.log(menu);
+  // console.log(menu);
 
   return (
     <section className="max-w-screen-xl mx-auto my-20 px-6 lg:px-0">

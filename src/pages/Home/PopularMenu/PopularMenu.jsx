@@ -12,7 +12,7 @@ const PopularMenu = () => {
         setMenu(popularItems);
       });
   }, []);
-  console.log(menu);
+  // console.log(menu);
   return (
     <section className="max-w-screen-xl mx-auto my-20 px-6 lg:px-0">
       <SectionTitle
@@ -24,7 +24,11 @@ const PopularMenu = () => {
           <MenuItem key={item._id} item={item}></MenuItem>
         ))}
       </div>
-      <button className="mt-10 btn mx-auto btn-block">View Full Menu</button>
+      <div className="text-center">
+        <button className="mt-10 px-7 py-3 border-b-2 border-b-[#1F2937] uppercase rounded-lg font-medium hover:btn">
+          View Full Menu
+        </button>
+      </div>
     </section>
   );
 };
