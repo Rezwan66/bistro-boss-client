@@ -8,8 +8,9 @@ const Cover = ({ img, title, subTitle }) => {
         bgImage={img}
         bgImageAlt="the menu"
         strength={-200}
+        style={{}}
       >
-        <div className="hero h-[650px]">
+        <div className="hero lg:h-[600px] md:h-[350px] h-[275px]">
           {/* style={{backgroundImage: `url('${img}')`,}} */}
           {/* <div className="hero-overlay bg-opacity-60"></div> */}
           <div className="hero-content text-center max-w-screen-xl mx-auto px-6 lg:px-0">

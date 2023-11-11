@@ -13,7 +13,7 @@ const About = () => {
         <div className="hero-content text-center max-w-screen-xl mx-auto px-6 lg:px-0">
           <div className="max-w-4xl bg-white lg:p-20 p-8">
             <h1 className="mb-5 text-5xl cinzel">Bistro Boss</h1>
-            <p className="mb-5">
+            <p className="">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Necessitatibus, libero accusamus laborum deserunt ratione dolor
               officiis praesentium! Deserunt magni aperiam dolor eius dolore at,
