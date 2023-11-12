@@ -22,3 +22,13 @@
   right: 45%; 
 }
 */
+
+.swiper-pagination-bullet {
+  width: 30px;
+  height: 30px;
+  padding: 4px;
+  background-color: transparent;
+}
+.swiper-pagination-bullet-active {
+  background-color: #bb8506;
+}

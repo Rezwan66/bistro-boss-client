@@ -41,7 +41,7 @@ const OrderPanel = ({ items }) => {
             </div>
           </SwiperSlide>
         ))}
-        <div className="my-10 flex justify-center gap-10">
+        <div className="mt-10 mb-16 flex justify-center gap-10">
           <button className="swiper-button-prev-custom btn btn-circle bg-[#BB8506] border border-black">
             <FaArrowLeft></FaArrowLeft>
           </button>
