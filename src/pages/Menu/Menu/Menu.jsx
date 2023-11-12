@@ -8,6 +8,7 @@ import dessertImg from '../../../assets/menu/dessert-bg.jpeg';
 import useMenu from '../../../hooks/useMenu';
 import SectionTitle from '../../../components/SectionTitle';
 import MenuCategory from '../MenuCategory/MenuCategory';
+import { useEffect } from 'react';
 
 const Menu = () => {
   const [menu] = useMenu();
@@ -16,6 +17,10 @@ const Menu = () => {
   const salad = menu.filter(item => item.category === 'salad');
   const pizza = menu.filter(item => item.category === 'pizza');
   const offered = menu.filter(item => item.category === 'offered');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>
@@ -37,12 +42,12 @@ const Menu = () => {
       {/* dessert menu items */}
       <MenuCategory
         items={dessert}
-        title="DESSERTS"
+        title="desserts"
         img={dessertImg}
       ></MenuCategory>
-      <MenuCategory items={pizza} title="PIZZA" img={pizzaImg}></MenuCategory>
-      <MenuCategory items={salad} title="SALADS" img={saladImg}></MenuCategory>
-      <MenuCategory items={soup} title="SOUPS" img={soupImg}></MenuCategory>
+      <MenuCategory items={pizza} title="pizza" img={pizzaImg}></MenuCategory>
+      <MenuCategory items={salad} title="salads" img={saladImg}></MenuCategory>
+      <MenuCategory items={soup} title="soups" img={soupImg}></MenuCategory>
     </div>
   );
 };

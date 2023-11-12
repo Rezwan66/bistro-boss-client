@@ -1,0 +1,13 @@
+.react-tabs__tab {
+  border: none;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.react-tabs__tab--selected {
+  color: #bb8506;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 8px;
+  font-weight: 700;
+}

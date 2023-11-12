@@ -1,11 +1,14 @@
 const ProductCard = ({ item }) => {
-  const { name, recipe, image } = item || {};
+  const { name, recipe, image, price } = item || {};
   return (
     <div>
       <div className="card bg-[#F3F3F3] shadow-md rounded-none h-[500px]">
         <figure>
           <img className="w-full h-[250px]" src={image} alt="menu item" />
         </figure>
+        <p className="absolute right-4 top-4 bg-[#111827] text-white px-3 py-1">
+          ${price}
+        </p>
         <div className="card-body text-center items-center">
           <h2 className="card-title">{name}</h2>
           <p>{recipe}</p>
