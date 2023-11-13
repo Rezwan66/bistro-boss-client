@@ -5,12 +5,13 @@ import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Register = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm();
   const { createUser } = useContext(AuthContext);
@@ -21,6 +22,12 @@ const Register = () => {
       .then(res => {
         const loggedUser = res.user;
         console.log(loggedUser);
+        Swal.fire({
+          title: 'Yayy!',
+          text: 'Signed Up Successfully',
+          icon: 'success',
+          confirmButtonText: 'Cool',
+        });
       })
       .catch(err => {
         console.log(err.message);

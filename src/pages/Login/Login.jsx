@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -9,10 +9,11 @@ import authPageBg from '../../assets/others/authentication.png';
 import { AuthContext } from '../../providers/AuthProvider';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import Swal from 'sweetalert2';
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
-  const captchaRef = useRef(null);
+  //   const captchaRef = useRef(null);
   const { loginUser } = useContext(AuthContext);
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -28,14 +29,20 @@ const Login = () => {
       .then(res => {
         const user = res.user;
         console.log(user);
+        Swal.fire({
+          title: 'Yayy!',
+          text: 'Signed In Successfully',
+          icon: 'success',
+          confirmButtonText: 'Cool',
+        });
       })
       .catch(err => {
         console.log(err.message);
       });
   };
 
-  const handleValidateCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handleValidateCaptcha = e => {
+    const user_captcha_value = e.target.value;
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
     } else {
@@ -94,22 +101,23 @@ const Login = () => {
                   <label className="label">
                     <LoadCanvasTemplate />
                   </label>
-                  <div className="flex md:flex-row flex-col md:items-center items-start justify-between gap-3">
-                    <input
-                      type="text"
-                      name="captcha"
-                      ref={captchaRef}
-                      placeholder="type the captcha above"
-                      className="input input-bordered flex-1"
-                      required
-                    />
-                    <button
+                  {/* <div className="flex md:flex-row flex-col md:items-center items-start justify-between gap-3"> */}
+                  <input
+                    onBlur={handleValidateCaptcha}
+                    type="text"
+                    name="captcha"
+                    // ref={captchaRef}
+                    placeholder="type the captcha above"
+                    className="input input-bordered"
+                    required
+                  />
+                  {/* <button
                       onClick={handleValidateCaptcha}
                       className="text-primary underline text-xs"
                     >
                       validate
-                    </button>
-                  </div>
+                    </button> */}
+                  {/* </div> */}
                 </div>
                 <div className="form-control mt-6">
                   <input

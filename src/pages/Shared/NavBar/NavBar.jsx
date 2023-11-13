@@ -1,7 +1,23 @@
 import { NavLink } from 'react-router-dom';
 import logoImg from '/logo.png';
+import { useContext } from 'react';
+import { AuthContext } from '../../../providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 const NavBar = () => {
+  const { user, logoutUser } = useContext(AuthContext);
+  const handleLogout = () => {
+    logoutUser()
+      .then(() =>
+        Swal.fire({
+          title: 'Success!',
+          text: 'Logged Out Successfully',
+          icon: 'success',
+          confirmButtonText: 'Cool',
+        })
+      )
+      .catch(err => console.log(err.message));
+  };
   const navOptions = (
     <>
       <li>
@@ -13,9 +29,22 @@ const NavBar = () => {
       <li>
         <NavLink to="/order/salads">ORDER FOOD</NavLink>
       </li>
-      <li>
-        <NavLink to="/login">LOGIN</NavLink>
-      </li>
+      {user ? (
+        <>
+          <button
+            onClick={handleLogout}
+            className="btn btn-ghost btn-sm mt-[1px]"
+          >
+            LOGOUT
+          </button>
+        </>
+      ) : (
+        <>
+          <li>
+            <NavLink to="/login">LOGIN</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
