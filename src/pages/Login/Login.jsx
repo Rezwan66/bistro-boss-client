@@ -7,7 +7,7 @@ import {
 import loginImg from '../../assets/others/auth.png';
 import authPageBg from '../../assets/others/authentication.png';
 import { AuthContext } from '../../providers/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
 
@@ -15,6 +15,11 @@ const Login = () => {
   const [disabled, setDisabled] = useState(true);
   //   const captchaRef = useRef(null);
   const { loginUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/';
+
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -35,6 +40,7 @@ const Login = () => {
           icon: 'success',
           confirmButtonText: 'Cool',
         });
+        navigate(from, { replace: true });
       })
       .catch(err => {
         console.log(err.message);

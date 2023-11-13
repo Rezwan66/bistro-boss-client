@@ -3,6 +3,7 @@ import logoImg from '/logo.png';
 import { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
 import Swal from 'sweetalert2';
+import noUserImg from '../../../assets/others/profile.png';
 
 const NavBar = () => {
   const { user, logoutUser } = useContext(AuthContext);
@@ -89,7 +90,22 @@ const NavBar = () => {
             <ul className="menu menu-horizontal px-1">{navOptions}</ul>
           </div>
           <div className="navbar-end">
-            <a className="btn">Button</a>
+            {user ? (
+              <div className="flex items-center gap-2">
+                <div className="avatar">
+                  <div className="w-9 rounded-full">
+                    <img src={user?.photoURL} />
+                  </div>
+                </div>
+                <p className="text-sm text-[#D99904]">{user?.displayName}</p>
+              </div>
+            ) : (
+              <div className="avatar">
+                <div className="w-9 rounded-full">
+                  <img src={noUserImg} />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import loginImg from '../../assets/others/auth.png';
 import authPageBg from '../../assets/others/authentication.png';
 import { useForm } from 'react-hook-form';
@@ -11,10 +11,12 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    reset,
     // watch,
     formState: { errors },
   } = useForm();
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile, logoutUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const onSubmit = data => {
     console.log(data);
@@ -22,12 +24,22 @@ const Register = () => {
       .then(res => {
         const loggedUser = res.user;
         console.log(loggedUser);
-        Swal.fire({
-          title: 'Yayy!',
-          text: 'Signed Up Successfully',
-          icon: 'success',
-          confirmButtonText: 'Cool',
-        });
+        updateUserProfile(data.name, data.photoURL)
+          .then(() => {
+            reset();
+            Swal.fire({
+              title: 'Yayy!',
+              text: 'Signed Up Successfully',
+              icon: 'success',
+              confirmButtonText: 'Cool',
+            });
+            logoutUser()
+              .then(() => {
+                navigate('/login');
+              })
+              .catch(err => console.log(err.message));
+          })
+          .catch(err => console.log(err.message));
       })
       .catch(err => {
         console.log(err.message);
@@ -67,6 +79,22 @@ const Register = () => {
                   {errors.name && (
                     <span className="text-red-600 ml-2 mt-1 text-xs">
                       Name is required
+                    </span>
+                  )}
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Photo URL</span>
+                  </label>
+                  <input
+                    type="text"
+                    {...register('photoURL', { required: true })}
+                    placeholder="your profile photo url"
+                    className="input input-bordered"
+                  />
+                  {errors.photoURL && (
+                    <span className="text-red-600 ml-2 mt-1 text-xs">
+                      Photo URL is required
                     </span>
                   )}
                 </div>
@@ -126,28 +154,6 @@ const Register = () => {
                     </p>
                   )}
                 </div>
-                {/* react-simple-captcha */}
-                {/* <div className="form-control">
-                <label className="label">
-                  <LoadCanvasTemplate />
-                </label>
-                <div className="flex md:flex-row flex-col md:items-center items-start justify-between gap-3">
-                  <input
-                    type="text"
-                    name="captcha"
-                    ref={captchaRef}
-                    placeholder="type the captcha above"
-                    className="input input-bordered flex-1"
-                    required
-                  />
-                  <button
-                    onClick={handleValidateCaptcha}
-                    className="text-primary underline text-xs"
-                  >
-                    validate
-                  </button>
-                </div>
-              </div> */}
                 <div className="form-control mt-6">
                   <input
                     // disabled={disabled}
