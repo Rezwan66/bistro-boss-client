@@ -1,11 +1,21 @@
 import { Link } from 'react-router-dom';
 import loginImg from '../../assets/others/auth.png';
 import authPageBg from '../../assets/others/authentication.png';
+import { useForm } from 'react-hook-form';
 
 const Register = () => {
-  const handleRegister = e => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = data => {
+    console.log(data);
   };
+
+  console.log(watch('name'));
 
   return (
     <div
@@ -19,7 +29,7 @@ const Register = () => {
           </div>
           <div className="card lg:w-1/2 md:max-w-md max-w-xs bg-transparent">
             <h1 className="text-4xl text-center font-bold">Sign Up!</h1>
-            <form onSubmit={handleRegister} className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -27,10 +37,15 @@ const Register = () => {
                 <input
                   type="text"
                   name="name"
+                  {...register('name', { required: true })}
                   placeholder="your full name"
                   className="input input-bordered"
-                  required
                 />
+                {errors.name && (
+                  <span className="text-red-600 ml-2 mt-1 text-xs">
+                    Name is required
+                  </span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -39,10 +54,15 @@ const Register = () => {
                 <input
                   type="email"
                   name="email"
+                  {...register('email', { required: true })}
                   placeholder="email"
                   className="input input-bordered"
-                  required
                 />
+                {errors.email && (
+                  <span className="text-red-600 ml-2 mt-1 text-xs">
+                    Email is required
+                  </span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -51,10 +71,36 @@ const Register = () => {
                 <input
                   type="password"
                   name="password"
+                  {...register('password', {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 20,
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                  })}
                   placeholder="password"
                   className="input input-bordered"
-                  required
                 />
+                {errors.password?.type === 'required' && (
+                  <p className="text-red-600 ml-2 mt-1 text-xs">
+                    Password is required
+                  </p>
+                )}
+                {errors.password?.type === 'minLength' && (
+                  <p className="text-red-600 ml-2 mt-1 text-xs">
+                    Password must be 6 characters
+                  </p>
+                )}
+                {errors.password?.type === 'maxLength' && (
+                  <p className="text-red-600 ml-2 mt-1 text-xs">
+                    Password must be less than 20 characters
+                  </p>
+                )}
+                {errors.password?.type === 'pattern' && (
+                  <p className="text-red-600 ml-2 mt-1 text-xs">
+                    Password must have 1 uppercase, 1 lowercase, a number and a
+                    special character.
+                  </p>
+                )}
               </div>
               {/* react-simple-captcha */}
               {/* <div className="form-control">
