@@ -11,7 +11,7 @@ const OrderPanel = ({ items }) => {
   const itemsPerPage = 6;
   const numberOfPages = Math.ceil(count / itemsPerPage);
   const pages = [...Array(numberOfPages).keys()];
-  console.log(count, pages);
+  // console.log(count, pages);
 
   const pagination = {
     // el: '.swiper-pagination',
