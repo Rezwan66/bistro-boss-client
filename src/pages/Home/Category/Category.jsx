@@ -9,6 +9,7 @@ import slide3 from '../../../assets/home/slide3.jpg';
 import slide4 from '../../../assets/home/slide4.jpg';
 import slide5 from '../../../assets/home/slide5.jpg';
 import SectionTitle from '../../../components/SectionTitle';
+import { Link } from 'react-router-dom';
 
 const Category = () => {
   return (
@@ -28,34 +29,44 @@ const Category = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src={slide1} alt="" />
-          <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
-            salads
-          </h3>
+          <Link to="/order/salads">
+            <img src={slide1} alt="" />
+            <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
+              salads
+            </h3>
+          </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <img src={slide2} alt="" />
-          <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
-            pizzas
-          </h3>
+          <Link to="/order/pizza">
+            <img src={slide2} alt="" />
+            <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
+              pizzas
+            </h3>
+          </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <img src={slide3} alt="" />
-          <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
-            soups
-          </h3>
+          <Link to="/order/soups">
+            <img src={slide3} alt="" />
+            <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
+              soups
+            </h3>
+          </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <img src={slide4} alt="" />
-          <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
-            desserts
-          </h3>
+          <Link to="/order/desserts">
+            <img src={slide4} alt="" />
+            <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
+              desserts
+            </h3>
+          </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <img src={slide5} alt="" />
-          <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
-            salads
-          </h3>
+          <Link to="/order/salads">
+            <img src={slide5} alt="" />
+            <h3 className="cinzel text-center md:text-3xl md:text-white uppercase md:-mt-20 md:mb-24 mb-10">
+              salads
+            </h3>
+          </Link>
         </SwiperSlide>
       </Swiper>
     </div>

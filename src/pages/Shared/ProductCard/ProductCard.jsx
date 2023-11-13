@@ -1,5 +1,37 @@
+import Swal from 'sweetalert2';
+import useAuth from '../../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+
 const ProductCard = ({ item }) => {
   const { name, recipe, image, price } = item || {};
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleAddToCart = food => {
+    if (user && user.email) {
+      // TODO:send data to DB
+    } else {
+      Swal.fire({
+        title: 'You are not Logged In',
+        text: 'Please Login to Add to Cart!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#BB8506',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Login!',
+      }).then(result => {
+        if (result.isConfirmed) {
+          // send user to login page
+          navigate('/login');
+        }
+        // else{Swal.fire({
+        //   title: 'Deleted!',
+        //   text: 'Your file has been deleted.',
+        //   icon: 'success',
+        // });}
+      });
+    }
+  };
   return (
     <div>
       <div className="card bg-[#F3F3F3] shadow-md rounded-none h-[500px]">
@@ -16,7 +48,10 @@ const ProductCard = ({ item }) => {
             {/* <button className="lg:px-7 px-4 py-3 border-b-2 border-b-[#BB8506] bg-[#E8E8E8] text-[#BB8506] uppercase rounded-lg hover:bg-[#1F2937] hover:border-none font-medium">
               add to cart
             </button> */}
-            <button className="btn btn-outline mt-6 border-0 border-b-4 text-[#BB8506] bg-[#E8E8E8] hover:text-[#BB8506]">
+            <button
+              onClick={() => handleAddToCart(item)}
+              className="btn btn-outline mt-6 border-0 border-b-4 text-[#BB8506] bg-[#E8E8E8] hover:text-[#BB8506]"
+            >
               add to cart
             </button>
           </div>

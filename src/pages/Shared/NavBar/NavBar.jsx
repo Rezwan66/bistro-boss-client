@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 import noUserImg from '../../../assets/others/profile.png';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const NavBar = () => {
   const { user, logoutUser } = useContext(AuthContext);
@@ -29,6 +30,14 @@ const NavBar = () => {
       </li>
       <li>
         <NavLink to="/order/salads">ORDER FOOD</NavLink>
+      </li>
+      <li className="lg:ml-2 my-2 lg:my-0">
+        <NavLink>
+          <button className="flex items-center">
+            <FaShoppingCart className="mr-2 text-lg text-[#D99904]"></FaShoppingCart>
+            <div className="badge bg-[#D99904] border-0 text-white">+99</div>
+          </button>
+        </NavLink>
       </li>
       {user ? (
         <>
@@ -73,7 +82,7 @@ const NavBar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-[#D99904]"
               >
                 {navOptions}
               </ul>
@@ -97,7 +106,9 @@ const NavBar = () => {
                     <img src={user?.photoURL} />
                   </div>
                 </div>
-                <p className="text-sm text-[#D99904]">{user?.displayName}</p>
+                <p className="text-sm text-[#D99904] font-semibold">
+                  {user?.displayName}
+                </p>
               </div>
             ) : (
               <div className="avatar">

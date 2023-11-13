@@ -1,6 +1,7 @@
 import SectionTitle from '../../../components/SectionTitle';
 import featuredImg from '../../../assets/home/featured.jpg';
 import './Featured.css';
+import { Link } from 'react-router-dom';
 
 const Featured = () => {
   const today = new Date();
@@ -31,9 +32,11 @@ const Featured = () => {
                 quasi. Eaque repellat recusandae ad laudantium tempore
                 consequatur consequuntur omnis ullam maxime tenetur.
               </p>
-              <button className="btn btn-outline mt-6 border-0 border-b-4 text-white">
-                Order Now
-              </button>
+              <Link to="/order/salads">
+                <button className="btn btn-outline mt-6 border-0 border-b-4 text-white">
+                  Order Now
+                </button>
+              </Link>
             </div>
           </div>
         </div>
