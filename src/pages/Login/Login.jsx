@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -6,10 +6,13 @@ import {
 } from 'react-simple-captcha';
 import loginImg from '../../assets/others/auth.png';
 import authPageBg from '../../assets/others/authentication.png';
+import { AuthContext } from '../../providers/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const captchaRef = useRef(null);
+  const { loginUser } = useContext(AuthContext);
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -19,7 +22,15 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    // console.log(email, password);
+    loginUser(email, password)
+      .then(res => {
+        const user = res.user;
+        console.log(user);
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
   };
 
   const handleValidateCaptcha = () => {
@@ -36,7 +47,7 @@ const Login = () => {
       className="min-h-screen py-20"
       style={{ backgroundImage: `url(${authPageBg})` }}
     >
-      <div className="hero lg:h-[750px] bg-transparent max-w-screen-xl mx-auto px-6 lg:px-0 shadow-2xl">
+      <div className="hero lg:h-[700px] bg-transparent max-w-screen-xl mx-auto px-6 lg:px-0 shadow-2xl">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:w-1/2 lg:text-left">
             <img src={loginImg} alt="" />
@@ -98,12 +109,20 @@ const Login = () => {
               <div className="form-control mt-6">
                 <input
                   disabled={disabled}
-                  className="btn btn-primary"
+                  className="btn bg-[#D1A054B2] text-white hover:text-black"
                   type="submit"
                   value="Sign In"
                 />
               </div>
             </form>
+            <p className="text-center text-[#D1A054]">
+              <small>
+                New Here?{' '}
+                <Link to="/register" className="font-bold">
+                  Create a New Account
+                </Link>
+              </small>
+            </p>
           </div>
         </div>
       </div>
