@@ -10,11 +10,12 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
+import { FaFacebookF, FaGoogle, FaGithub } from 'react-icons/fa';
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   //   const captchaRef = useRef(null);
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -54,6 +55,24 @@ const Login = () => {
     } else {
       setDisabled(true);
     }
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then(res => {
+        const user = res.user;
+        console.log(user);
+        Swal.fire({
+          title: 'Yayy!',
+          text: 'Signed In using Google',
+          icon: 'success',
+          confirmButtonText: 'Cool',
+        });
+        navigate(from, { replace: true });
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
   };
 
   return (
@@ -142,6 +161,21 @@ const Login = () => {
                   </Link>
                 </small>
               </p>
+              <div className="divider px-10 text-sm my-6">Or sign in with</div>
+              <div className="flex items-center justify-center gap-10 lg:mb-0 mb-6">
+                <button className="btn btn-outline btn-circle">
+                  <FaFacebookF></FaFacebookF>
+                </button>
+                <button
+                  onClick={handleGoogleLogin}
+                  className="btn btn-outline btn-circle"
+                >
+                  <FaGoogle></FaGoogle>
+                </button>
+                <button className="btn btn-outline btn-circle">
+                  <FaGithub></FaGithub>
+                </button>
+              </div>
             </div>
           </div>
         </div>

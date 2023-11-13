@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet-async';
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
+import { FaFacebookF, FaGoogle, FaGithub } from 'react-icons/fa';
 
 const Register = () => {
   const {
@@ -15,7 +16,8 @@ const Register = () => {
     // watch,
     formState: { errors },
   } = useForm();
-  const { createUser, updateUserProfile, logoutUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile, googleLogin, logoutUser } =
+    useContext(AuthContext);
   const navigate = useNavigate();
 
   const onSubmit = data => {
@@ -46,6 +48,24 @@ const Register = () => {
       });
   };
 
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then(res => {
+        const user = res.user;
+        console.log(user);
+        Swal.fire({
+          title: 'Yayy!',
+          text: 'Signed In using Google',
+          icon: 'success',
+          confirmButtonText: 'Cool',
+        });
+        navigate('/');
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+  };
+
   // console.log(watch('name'));
 
   return (
@@ -57,7 +77,7 @@ const Register = () => {
         className="min-h-screen py-20"
         style={{ backgroundImage: `url(${authPageBg})` }}
       >
-        <div className="hero lg:h-[700px] bg-transparent max-w-screen-xl mx-auto px-6 lg:px-0 shadow-2xl">
+        <div className="hero lg:h-[750px] bg-transparent max-w-screen-xl mx-auto px-6 lg:px-0 shadow-2xl">
           <div className="hero-content flex-col lg:flex-row-reverse">
             <div className="text-center lg:w-1/2 lg:text-left">
               <img src={loginImg} alt="" />
@@ -171,6 +191,21 @@ const Register = () => {
                   </Link>
                 </small>
               </p>
+              <div className="divider px-10 text-sm my-6">Or sign up with</div>
+              <div className="flex items-center justify-center gap-10 lg:mb-0 mb-6">
+                <button className="btn btn-outline btn-circle">
+                  <FaFacebookF></FaFacebookF>
+                </button>
+                <button
+                  onClick={handleGoogleLogin}
+                  className="btn btn-outline btn-circle"
+                >
+                  <FaGoogle></FaGoogle>
+                </button>
+                <button className="btn btn-outline btn-circle">
+                  <FaGithub></FaGithub>
+                </button>
+              </div>
             </div>
           </div>
         </div>
