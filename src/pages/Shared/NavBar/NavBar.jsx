@@ -5,9 +5,12 @@ import { AuthContext } from '../../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 import noUserImg from '../../../assets/others/profile.png';
 import { FaShoppingCart } from 'react-icons/fa';
+import useCart from '../../../hooks/useCart';
 
 const NavBar = () => {
   const { user, logoutUser } = useContext(AuthContext);
+  const [cart] = useCart();
+
   const handleLogout = () => {
     logoutUser()
       .then(() =>
@@ -35,7 +38,9 @@ const NavBar = () => {
         <NavLink>
           <button className="flex items-center">
             <FaShoppingCart className="mr-2 text-lg text-[#D99904]"></FaShoppingCart>
-            <div className="badge bg-[#D99904] border-0 text-white">+99</div>
+            <div className="badge bg-[#D99904] border-0 text-white">
+              +{cart.length}
+            </div>
           </button>
         </NavLink>
       </li>
