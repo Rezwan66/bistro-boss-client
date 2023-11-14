@@ -35,7 +35,7 @@ const NavBar = () => {
         <NavLink to="/order/salads">ORDER FOOD</NavLink>
       </li>
       <li className="lg:ml-2 my-2 lg:my-0">
-        <NavLink>
+        <NavLink to="/dashboard/cart">
           <button className="flex items-center">
             <FaShoppingCart className="mr-2 text-lg text-[#D99904]"></FaShoppingCart>
             <div className="badge bg-[#D99904] border-0 text-white">
