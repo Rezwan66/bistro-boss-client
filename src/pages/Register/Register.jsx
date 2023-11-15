@@ -7,8 +7,10 @@ import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 import { FaFacebookF, FaGoogle, FaGithub } from 'react-icons/fa';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const Register = () => {
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -21,25 +23,34 @@ const Register = () => {
   const navigate = useNavigate();
 
   const onSubmit = data => {
-    console.log(data);
+    // console.log(data);
     createUser(data.email, data.password)
       .then(res => {
         const loggedUser = res.user;
         console.log(loggedUser);
         updateUserProfile(data.name, data.photoURL)
           .then(() => {
-            reset();
-            Swal.fire({
-              title: 'Yayy!',
-              text: 'Signed Up Successfully',
-              icon: 'success',
-              confirmButtonText: 'Cool',
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+            };
+            // create user entry in the DB
+            axiosPublic.post('/users', userInfo).then(res => {
+              if (res.data.insertedId) {
+                reset();
+                Swal.fire({
+                  title: 'Yayy!',
+                  text: 'Signed Up Successfully',
+                  icon: 'success',
+                  confirmButtonText: 'Cool',
+                });
+                logoutUser()
+                  .then(() => {
+                    navigate('/login');
+                  })
+                  .catch(err => console.log(err.message));
+              }
             });
-            logoutUser()
-              .then(() => {
-                navigate('/login');
-              })
-              .catch(err => console.log(err.message));
           })
           .catch(err => console.log(err.message));
       })
