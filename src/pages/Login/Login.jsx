@@ -11,9 +11,11 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
 import { FaFacebookF, FaGoogle, FaGithub } from 'react-icons/fa';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
+  const axiosPublic = useAxiosPublic();
   //   const captchaRef = useRef(null);
   const { loginUser, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -62,13 +64,30 @@ const Login = () => {
       .then(res => {
         const user = res.user;
         console.log(user);
-        Swal.fire({
-          title: 'Yayy!',
-          text: 'Signed In using Google',
-          icon: 'success',
-          confirmButtonText: 'Cool',
+        const userInfo = {
+          email: user?.email,
+          name: user?.displayName,
+        };
+        axiosPublic.post('/users', userInfo).then(res => {
+          console.log(res.data);
+          // if (res.data.insertedId) {
+          Swal.fire({
+            title: 'Yayy!',
+            text: 'Signed In using Google',
+            icon: 'success',
+            confirmButtonText: 'Cool',
+          });
+          navigate(from, { replace: true });
+          // }
+          // else {
+          //   Swal.fire({
+          //     title: 'Oops!',
+          //     text: 'User already exists!',
+          //     icon: 'error',
+          //     confirmButtonText: 'Cool',
+          //   });
+          // }
         });
-        navigate(from, { replace: true });
       })
       .catch(err => {
         console.log(err.message);

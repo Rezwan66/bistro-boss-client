@@ -50,12 +50,26 @@ const Register = () => {
                   })
                   .catch(err => console.log(err.message));
               }
+              // else {
+              //   Swal.fire({
+              //     title: 'Oops!',
+              //     text: 'User already exists!',
+              //     icon: 'error',
+              //     confirmButtonText: 'Cool',
+              //   });
+              // }
             });
           })
           .catch(err => console.log(err.message));
       })
       .catch(err => {
         console.log(err.message);
+        Swal.fire({
+          title: 'Oops!',
+          text: err.message,
+          icon: 'error',
+          confirmButtonText: 'Cool',
+        });
       });
   };
 
@@ -64,13 +78,30 @@ const Register = () => {
       .then(res => {
         const user = res.user;
         console.log(user);
-        Swal.fire({
-          title: 'Yayy!',
-          text: 'Signed In using Google',
-          icon: 'success',
-          confirmButtonText: 'Cool',
+        const userInfo = {
+          email: user?.email,
+          name: user?.displayName,
+        };
+        axiosPublic.post('/users', userInfo).then(res => {
+          console.log(res.data);
+          // if (res.data.insertedId) {
+          Swal.fire({
+            title: 'Yayy!',
+            text: 'Signed In using Google',
+            icon: 'success',
+            confirmButtonText: 'Cool',
+          });
+          navigate('/');
+          // }
+          // else {
+          //   Swal.fire({
+          //     title: 'Oops!',
+          //     text: 'User already exists!',
+          //     icon: 'error',
+          //     confirmButtonText: 'Cool',
+          //   });
+          // }
         });
-        navigate('/');
       })
       .catch(err => {
         console.log(err.message);
