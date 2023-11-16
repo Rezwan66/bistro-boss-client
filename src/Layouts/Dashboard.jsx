@@ -16,12 +16,13 @@ import { RiAdminFill } from 'react-icons/ri';
 import { ImSpoonKnife } from 'react-icons/im';
 import { NavLink, Outlet } from 'react-router-dom';
 import useCart from '../hooks/useCart';
+import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
   const { cart } = useCart();
 
   // TODO: get isAdmin value from DB
-  const isAdmin = true;
+  const { isAdmin } = useAdmin();
 
   return (
     <div className="flex">
