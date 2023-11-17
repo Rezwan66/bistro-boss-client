@@ -1,7 +1,14 @@
-import { FaRegTrashAlt, FaUsers } from 'react-icons/fa';
+import { FaEdit, FaRegTrashAlt, FaUsers } from 'react-icons/fa';
 import SectionTitle from '../../../components/SectionTitle';
+import useMenu from '../../../hooks/useMenu';
 
 const ManageItems = () => {
+  const [menu] = useMenu();
+
+  const handleDeleteItem = item => {
+    console.log(item);
+  };
+
   return (
     <div>
       <SectionTitle
@@ -19,41 +26,49 @@ const ManageItems = () => {
               <thead className="bg-[#D1A054]">
                 <tr className="uppercase text-white">
                   <th>#</th>
-                  <th>NAME</th>
-                  <th>EMAIL</th>
-                  <th>role</th>
-                  <th>action</th>
+                  <th>ITEM IMAGE</th>
+                  <th>ITEM NAME</th>
+                  <th>PRICE</th>
+                  <th>UPDATE</th>
+                  <th>DELETE</th>
                 </tr>
               </thead>
               <tbody>
                 {/* row 1 */}
-                {/* {users?.map((user, idx) => (
-                  <tr key={user._id}>
+                {menu?.map((item, idx) => (
+                  <tr key={item._id}>
                     <th>{idx + 1}</th>
-                    <td>{user?.name}</td>
-                    <td>{user?.email}</td>
+                    <td>
+                      <div className="avatar">
+                        <div className="mask mask-square w-12 h-12">
+                          <img
+                            src={item?.image}
+                            className="object-cover"
+                            alt="Avatar Tailwind CSS Component"
+                          />
+                        </div>
+                      </div>
+                    </td>
+                    <td>{item?.name}</td>
+                    <td className="text-right">${item?.price}</td>
                     <th>
-                      {user?.role === 'admin' ? (
-                        <span className="text-success font-black">ADMIN</span>
-                      ) : (
-                        <button
+                      <button
                         //   onClick={() => handleMakeAdmin(user)}
-                          className="btn btn-sm btn-accent text-white ml-1"
-                        >
-                          <FaUsers></FaUsers>
-                        </button>
-                      )}
+                        className="btn btn-sm btn-accent text-white ml-1"
+                      >
+                        <FaEdit></FaEdit>
+                      </button>
                     </th>
                     <th>
                       <button
-                        // onClick={() => handleDelete(user)}
+                        onClick={() => handleDeleteItem(item)}
                         className="btn btn-sm btn-error text-white ml-1"
                       >
                         <FaRegTrashAlt></FaRegTrashAlt>
                       </button>
                     </th>
                   </tr>
-                ))} */}
+                ))}
               </tbody>
             </table>
           </div>
