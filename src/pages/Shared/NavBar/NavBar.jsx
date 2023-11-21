@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logoImg from '/logo.png';
 import { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
@@ -6,9 +6,11 @@ import Swal from 'sweetalert2';
 import noUserImg from '../../../assets/others/profile.png';
 import { FaShoppingCart } from 'react-icons/fa';
 import useCart from '../../../hooks/useCart';
+import useAdmin from '../../../hooks/useAdmin';
 
 const NavBar = () => {
   const { user, logoutUser } = useContext(AuthContext);
+  const { isAdmin } = useAdmin();
   const { cart } = useCart();
 
   const handleLogout = () => {
@@ -34,6 +36,19 @@ const NavBar = () => {
       <li>
         <NavLink to="/order/salads">ORDER FOOD</NavLink>
       </li>
+      {
+        // user? isAdmin? 'double true':'one true' : 'false'
+      }
+      {user && isAdmin && (
+        <li>
+          <Link to="/dashboard/adminHome">Dashboard</Link>
+        </li>
+      )}
+      {user && !isAdmin && (
+        <li>
+          <Link to="/dashboard/userHome">Dashboard</Link>
+        </li>
+      )}
       <li className="lg:ml-2 my-2 lg:my-0">
         <NavLink to="/dashboard/cart">
           <button className="flex items-center">
