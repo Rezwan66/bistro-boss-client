@@ -89,13 +89,13 @@ const AdminHome = () => {
   });
 
   return (
-    <div className="p-10">
+    <div className="max-w-7xl mx-auto p-10">
       <h2 className="text-3xl">
         <span>Hi, Welcome </span>
         {user?.displayName ? user?.displayName : 'Back'}
       </h2>
       <div className="mt-6">
-        <div className="stats rounded-none text-white gap-6">
+        <div className="stats flex justify-between rounded-none text-white gap-6">
           <div className="stat rounded-md flex items-center py-8 bg-gradient-to-r from-[#BB34F5] to-[#FCDBFF] px-10">
             <div className="text-white">
               <FaWallet className="text-4xl"></FaWallet>
@@ -142,11 +142,11 @@ const AdminHome = () => {
           </div>
         </div>
         {/* charts */}
-        <div className="flex mt-10 items-center">
+        <div className="flex mt-20 items-center justify-between gap-20">
           <div className="w-1/2">
             <BarChart
-              width={500}
-              height={300}
+              width={600}
+              height={400}
               data={chartData}
               margin={{
                 top: 20,
@@ -178,7 +178,7 @@ const AdminHome = () => {
                 cy="50%"
                 labelLine={false}
                 label={renderCustomizedLabel}
-                outerRadius={80}
+                outerRadius={130}
                 fill="#8884d8"
                 dataKey="value"
               >
