@@ -2,9 +2,20 @@ import { useQuery } from '@tanstack/react-query';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { FaListAlt, FaTruck, FaUsers, FaWallet } from 'react-icons/fa';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  PieChart,
+  Pie,
+  Legend,
+} from 'recharts';
 
 const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
 
 const AdminHome = () => {
   const { user } = useAuth();
@@ -45,6 +56,37 @@ const AdminHome = () => {
 
     return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
   };
+
+  //   custom shape for the pie chart
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+  }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? 'start' : 'end'}
+        dominantBaseline="central"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
+
+  const pieChartData = chartData.map(data => {
+    return { name: data.category, value: data.revenue };
+  });
 
   return (
     <div className="p-10">
@@ -100,7 +142,7 @@ const AdminHome = () => {
           </div>
         </div>
         {/* charts */}
-        <div className="flex mt-10">
+        <div className="flex mt-10 items-center">
           <div className="w-1/2">
             <BarChart
               width={500}
@@ -128,7 +170,28 @@ const AdminHome = () => {
               </Bar>
             </BarChart>
           </div>
-          <div className="w-1/2"></div>
+          <div className="w-1/2">
+            <PieChart width={400} height={400}>
+              <Pie
+                data={pieChartData}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={renderCustomizedLabel}
+                outerRadius={80}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {pieChartData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+              <Legend></Legend>
+            </PieChart>
+          </div>
         </div>
       </div>
     </div>
